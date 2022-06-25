@@ -1,14 +1,20 @@
 package softuni.examprepBattleships.models.DTO.user;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class LoginDTO {
 
     @Size(min = 3, max = 10)
+    @NotBlank
     private String username;
 
     @Size(min = 3)
+    @NotBlank
     private String password;
+
+    public LoginDTO() {
+    }
 
     public String getUsername() {
         return username;

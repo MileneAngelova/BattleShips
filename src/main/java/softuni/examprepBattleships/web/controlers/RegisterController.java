@@ -1,6 +1,5 @@
 package softuni.examprepBattleships.web.controlers;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,11 +7,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import softuni.examprepBattleships.models.DTO.user.RegisterDTO;
+import softuni.examprepBattleships.services.user.RegisterService;
 
 import javax.validation.Valid;
 
 @Controller
 public class RegisterController {
+
+    private RegisterService registerService;
+
+    public RegisterController(RegisterService registerService) {
+        this.registerService = registerService;
+    }
+
 
     @ModelAttribute("registerDTO")
     public RegisterDTO initRegistration() {
@@ -27,7 +34,7 @@ public class RegisterController {
     @PostMapping("/register")
     public String register(@Valid RegisterDTO registerDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || !registerService.register(registerDTO)) {
             redirectAttributes.addFlashAttribute("registerDto", registerDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerDTO", bindingResult);
 

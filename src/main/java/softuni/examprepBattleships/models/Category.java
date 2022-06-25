@@ -1,6 +1,6 @@
 package softuni.examprepBattleships.models;
 
-import softuni.examprepBattleships.models.enums.CategoryNameEnum;
+import softuni.examprepBattleships.models.enums.ShipType;
 
 import javax.persistence.*;
 
@@ -14,7 +14,7 @@ public class Category {
 
     @Enumerated
     @Column(unique = true)
-    private CategoryNameEnum name;
+    private ShipType name;
 
     @Column(columnDefinition = "TEXT")
     private String description;
@@ -31,11 +31,11 @@ public class Category {
         return this;
     }
 
-    public CategoryNameEnum getName() {
+    public ShipType getName() {
         return name;
     }
 
-    public Category setName(CategoryNameEnum name) {
+    public Category setName(ShipType name) {
         this.name = name;
         return this;
     }
