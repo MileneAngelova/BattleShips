@@ -1,7 +1,6 @@
 package softuni.examprepBattleships.models.DTO.user;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -23,6 +22,8 @@ public class RegisterDTO {
     @NotBlank
     private String password;
 
+    @Size(min = 3)
+    @NotBlank
     private String confirmPassword;
 
     public RegisterDTO() {

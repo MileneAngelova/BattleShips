@@ -9,7 +9,6 @@ import softuni.examprepBattleships.models.User;
 public class LoggedUser {
 
     private long id;
-
     private String fullName;
 
     public void login(User user) {

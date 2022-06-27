@@ -7,11 +7,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import softuni.examprepBattleships.models.DTO.user.CreateShipDTO;
+import softuni.examprepBattleships.services.ShipService;
+import softuni.examprepBattleships.services.user.LoginService;
 
 import javax.validation.Valid;
 
 @Controller
 public class ShipController {
+
+   private ShipService shipService;
+   private LoginService loginService;
+
+    public ShipController(ShipService shipService, LoginService loginService) {
+        this.shipService = shipService;
+        this.loginService = loginService;
+    }
 
     @ModelAttribute("createShipDTO")
     public CreateShipDTO initCreateShipDTO() {
@@ -20,13 +30,13 @@ public class ShipController {
 
     @GetMapping("/ships/add")
     public String ships() {
-        return "/ships-add";
+        return "/ship-add";
     }
 
     @PostMapping("/ships/add")
     public String ships(@Valid CreateShipDTO createShipDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || !this.shipService.create(createShipDTO)) {
             redirectAttributes.addFlashAttribute("createShipDTO", createShipDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.createShipDTO", bindingResult);
 

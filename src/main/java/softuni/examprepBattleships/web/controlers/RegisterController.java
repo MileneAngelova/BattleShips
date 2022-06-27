@@ -34,11 +34,17 @@ public class RegisterController {
     @PostMapping("/register")
     public String register(@Valid RegisterDTO registerDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-        if (bindingResult.hasErrors() || !registerService.register(registerDTO)) {
+        if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("registerDto", registerDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerDTO", bindingResult);
 
             return "redirect:/register";
+        }
+        if (!registerService.register(registerDTO)) {
+            redirectAttributes.addFlashAttribute("registerDTO", registerDTO);
+            redirectAttributes.addFlashAttribute("badCredentials", true);
+
+        return "redirect:/register";
         }
 
         return "redirect:/login";
