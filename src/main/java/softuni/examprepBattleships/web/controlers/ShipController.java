@@ -15,8 +15,8 @@ import javax.validation.Valid;
 @Controller
 public class ShipController {
 
-   private ShipService shipService;
-   private LoginService loginService;
+    private ShipService shipService;
+    private LoginService loginService;
 
     public ShipController(ShipService shipService, LoginService loginService) {
         this.shipService = shipService;
@@ -42,6 +42,6 @@ public class ShipController {
 
             return "redirect:/ships/add";
         }
-return "redirect:/home";
+        return "redirect:/home";
     }
 }

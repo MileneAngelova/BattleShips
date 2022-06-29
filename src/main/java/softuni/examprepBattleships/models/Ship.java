@@ -1,8 +1,8 @@
 package softuni.examprepBattleships.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,8 +25,7 @@ public class Ship {
     private long power;
 
     @Column(nullable = false)
-    @PastOrPresent
-    private LocalDateTime created;
+    private LocalDate created;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -92,11 +91,11 @@ public class Ship {
         return this;
     }
 
-    public LocalDateTime getCreated() {
+    public LocalDate getCreated() {
         return created;
     }
 
-    public Ship setCreated(LocalDateTime created) {
+    public Ship setCreated(LocalDate created) {
         this.created = created;
         return this;
     }
